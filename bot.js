@@ -1,5 +1,5 @@
 import Telegraf from "telegraf";
-import { crawlTemporaryEmail } from "./crawlTemporaryEmail.js";
+import { registerAvocodeTrialAccount } from './registrerAvocodeTrialAccount.js';
 
 export const bot = (token) => {
   const bot = new Telegraf(token);
@@ -10,7 +10,9 @@ export const bot = (token) => {
     return ctx.reply(email);
   });
   bot.command("avocodeTrialAccount", async (ctx) => {
-    
+    const account = await registerAvocodeTrialAccount();
+
+    return ctx.reply(JSON.stringify(account));
   });
   bot.help((ctx) => ctx.reply(`
     Here is the list of available commands:
