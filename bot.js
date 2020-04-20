@@ -1,5 +1,5 @@
 import Telegraf from "telegraf";
-import { registerAvocodeTrialAccount } from './registrerAvocodeTrialAccount.js';
+import { registerAvocodeTrialAccount } from "./registrerAvocodeTrialAccount.js";
 
 export const bot = (token) => {
   const bot = new Telegraf(token);
@@ -10,14 +10,16 @@ export const bot = (token) => {
     return ctx.reply(email);
   });
   bot.command("avocodeTrialAccount", async (ctx) => {
-    const account = await registerAvocodeTrialAccount();
+    const credentials = await registerAvocodeTrialAccount();
 
-    return ctx.reply(JSON.stringify(account));
+    return ctx.replyWithHTML(credentials);
   });
-  bot.help((ctx) => ctx.reply(`
+  bot.help((ctx) =>
+    ctx.reply(`
     Here is the list of available commands:
-    - /tempEmail — returns temorary email
+    - /tempEmail — returns temporary email
     - /avocodeTrialAccount - returns Avocode's trial account
-  `));
+  `)
+  );
   bot.launch();
 };
