@@ -4,35 +4,33 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "build": "webpack --config webpack.config.cjs"
+    "build:rollup": "rollup -c"
   },
   "keywords": [],
-  "author": "",
-  "type": "module",
+  "author": "Mike Syomin",
   "license": "ISC",
   "dependencies": {
-    "@babel/core": "^7.2.2",
-    "@babel/preset-env": "^7.2.3",
-    "@rollup/plugin-json": "^4.0.3",
     "axios-https-proxy-fix": "^0.17.1",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
     "form-data": "^3.0.0",
     "free-proxy": "^0.1.6",
     "node-fetch": "^2.6.0",
-    "rollup": "^1.0.0",
-    "rollup-plugin-babel": "^4.2.0",
-    "rollup-plugin-commonjs": "^9.2.0",
-    "rollup-plugin-node-resolve": "^4.0.0",
-    "rollup-plugin-re": "^1.0.7",
-    "babel-loader": "^8.0.5",
-    "nodemon-webpack-plugin": "^4.0.8",
-    "webpack": "^4.29.6",
-    "webpack-cli": "^3.3.0",
-    "webpack-node-externals": "^1.7.2",
+    "puppeteer": "^3.0.0",
     "telegraf": "^3.37.0"
   },
   "devDependencies": {
-    "puppeteer": "^3.0.0"
+    "@babel/core": "^7.2.2",
+    "@babel/preset-env": "^7.2.3",
+    "@rollup/plugin-json": "^4.0.3",
+    "rollup": "^2.6.1",
+    "rollup-plugin-babel": "^4.2.0",
+    "rollup-plugin-commonjs": "^9.2.0",
+    "rollup-plugin-inject": "^3.0.2",
+    "rollup-plugin-json": "^4.0.0",
+    "rollup-plugin-node-builtins": "^2.1.2",
+    "rollup-plugin-node-globals": "^1.4.0",
+    "rollup-plugin-node-resolve": "^4.0.0",
+    "rollup-plugin-exclude-dependencies-from-bundle": "^1.1.8"
   }
 }
