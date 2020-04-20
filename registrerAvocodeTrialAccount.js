@@ -8,7 +8,7 @@ const register = async (page, credentials) => {
   const response = await page.evaluate(async (credentials) => {
     credentials = JSON.parse(credentials);
 
-    console.log('Fetching csrf-token');
+    console.log("Fetching csrf-token");
     const csrftoken = await fetch(
       "https://manager.avocode.com/api/get-csrftoken/",
       {
@@ -61,7 +61,9 @@ const register = async (page, credentials) => {
       }
     ).then((res) => res.json());
 
-    console.log(`Register email: ${credentials.email} and password ${credentials.pass}`);
+    console.log(
+      `Register email: ${credentials.email} and password ${credentials.pass}`
+    );
     const registerResponse = await fetch(
       "https://manager.avocode.com/api/account/create/",
       {
@@ -100,7 +102,11 @@ const register = async (page, credentials) => {
 };
 
 export const registerAvocodeTrialAccount = async () => {
-  const browser = await puppeteer.launch({ headless: true, devtools: true });
+  const browser = await puppeteer.launch({
+    headless: true,
+    devtools: true,
+    args: ["--no-sandbox", "--disable-setuid-sandbox"],
+  });
   const [page] = await browser.pages();
 
   const credentials = await getNewEmail();
@@ -110,7 +116,18 @@ export const registerAvocodeTrialAccount = async () => {
 
     const letter = await checkEmail(credentials);
 
-    return [credentials, letter];
+    const [confirmationLink] = letter.text
+      .match(/^<.+$/gm)
+      .filter((string) => !string.includes("app.avocode.com"))
+      .map((string) => {
+
+        return string.trim().substr(1, string.length - 2)
+      });
+
+    return `
+    * email: ${credentials.email}, 
+    * password: ${credentials.pass}, 
+    * confirmation link: ${confirmationLink}`;
   } catch (e) {
     console.warn("Error while registration of trial account", e);
   } finally {
