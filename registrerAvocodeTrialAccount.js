@@ -124,10 +124,7 @@ export const registerAvocodeTrialAccount = async () => {
         return string.trim().substr(1, string.length - 2)
       });
 
-    return `
-    * email: ${credentials.email}, 
-    * password: ${credentials.pass}, 
-    * confirmation link: ${confirmationLink}`;
+    return `*email:* ${credentials.email}\n*pass:* ${credentials.pass}\n*link: *${confirmationLink}`;
   } catch (e) {
     console.warn("Error while registration of trial account", e);
   } finally {
