@@ -1,5 +1,6 @@
 import Telegraf from "telegraf";
 import { registerAvocodeTrialAccount } from "./registrerAvocodeTrialAccount.js";
+import { getNewEmail } from "./getNewEmail.js";
 
 export const bot = (token) => {
   const bot = new Telegraf(token);
@@ -7,7 +8,7 @@ export const bot = (token) => {
   bot.start((ctx) => ctx.reply("Welcome"));
 
   bot.command("tempEmail", async (ctx) => {
-    const email = await crawlTemporaryEmail();
+    const email = await getNewEmail();
 
     return ctx.reply(email);
   });
